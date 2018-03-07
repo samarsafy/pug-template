@@ -2,26 +2,45 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
 
 var config = {
-  entry: './src/main.js',
+  entry: './src/main.jsx',
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: 'index.js',
+    filename: 'bundle.js'
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Pug Template',
-      h2: 'Checkout',
-      template: '!!pug-loader!src/index.pug',
-      posts: [{
-        name: 'Tomate',
-        price: 1.50 
-      }, 
-      {name: 'carrots',
-      price: 2}, {
-      name: 'apple', 
-      price: 4
-      }]
-    }),
-  ]
+  devServer: {
+    inline: true,
+    port: 8080
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react']
+        }
+      }
+    ]
+  },
+  plugins: [new HtmlWebpackPlugin({
+      title: 'Pug Test',
+      minify: {
+        collapseWhitespace: true
+      },
+      posts: [
+        {
+          name: 'pen',
+          price: 1.50
+        }, {
+          name: 'carrots',
+          price: 2
+        }, {
+          name: 'apple',
+          price: 4
+        }
+      ],
+      template: '!!pug-loader!src/index.pug'
+    })]
 }
 module.exports = config;
