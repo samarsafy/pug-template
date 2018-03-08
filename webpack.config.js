@@ -42,5 +42,5 @@ var config = {
       ],
       template: '!!pug-loader!src/index.pug'
     })]
-}
+};
 module.exports = config;
