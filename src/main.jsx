@@ -3,14 +3,12 @@ import Product from './Product.jsx';
 import ReactDOM from 'react-dom';
 import Header from './Header.jsx';
 import Footer from './Footer.jsx';
-
-
-
+import Form from './Form.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = JSON.parse(localStorage.getItem('react-cart')) || {
+    this.state =  {
       data: [
         {
           "id": 0,
@@ -25,18 +23,24 @@ class App extends React.Component {
           "amount": 1,
           "price": "38.99"
         }
-      ]
+      ],
+      headerdata: {
+        "title": "hallo from React",
+        "desc": "Below is an example from built entirely with Bootstrap's form controls.Each required form group has a validation state that can be triggered by attempting to submit the form without completting it."
+          
+        }
+      }
     };
-  }
 
   render() {
     return(
       <div>
-        <Header/>
-        {this.state.data.map((person, i) => <Product data={person}/>)};
+        <Header headerdata={this.state.headerdata}/>
+        {this.state.data.map((person, i) => <Product key={i} data={person}/>)};
+        <Form/>
         <Footer/>
       </div>
-    )
+    );
   }
 }
 
